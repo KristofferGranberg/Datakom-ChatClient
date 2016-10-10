@@ -1,4 +1,5 @@
 //package datakom.ht16.given;
+import java.io.ByteArrayInputStream;
 import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStream;
