@@ -1,5 +1,3 @@
-//package datakom.ht16.given;
-import java.io.ByteArrayInputStream;
 import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -19,6 +17,7 @@ public class PDUInputStream {
      * @throws java.io.EOFException If the stream closed without an error.
      * @throws java.io.IOException If the stream closed with an error.
      */
+    //// TODO: 2016-10-11 much more...
     public Pdu readPdu() throws EOFException, IOException {
 /*
         while(pduScanner.hasNext()){
@@ -29,8 +28,8 @@ public class PDUInputStream {
                 case 10: PduMess inMessage = new PduMess("not " +
                         "implemented yet!");
                     break;
-                case 11: PduQuit quitMessage = new PduQuit("not yet" +
-                        " implemented!");
+                case 11: //we recieved a quit message.
+                         //terminate connection.
                     break;
                 case 16: PduPjoin joinMessage = new PduPjoin();
                     break;

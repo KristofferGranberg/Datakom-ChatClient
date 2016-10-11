@@ -41,7 +41,7 @@ public class Checksum {
      * correct checksum.
      */
 
-    //TODO: Test the checksum!!
+    //// TODO: 2016-10-11 test the checksum, not sure about it returning -1
     public static byte computeChecksum(byte[] buf) {
 
         int sum = 0;
