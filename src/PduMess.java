@@ -66,7 +66,7 @@ public class PduMess extends Pdu {
     public PduMess(byte[] byteArray){
         super();
         if(Checksum.computeChecksum(byteArray) != -1){
-            throw new IllegalArgumentException("the checksom is not" +
+            throw new IllegalArgumentException("the checksum is not" +
                     " correct: message is corrupt!");
         }
         if(byteArray[1] != 0 || byteArray[6] != 0|| byteArray[7] != 0){
@@ -80,8 +80,11 @@ public class PduMess extends Pdu {
         return sequenceBuilder.toByteArray()[2];
     }
 
-    private short getMessageLenght(){
-        return sequenceBuilder.toByteArray()[4];
+    private short getMessageLength(){
+        ByteBuffer byteBuffer = ByteBuffer.allocate(2);
+        byteBuffer.put(sequenceBuilder.toByteArray()[4]);
+        byteBuffer.put(sequenceBuilder.toByteArray()[5]);
+        return byteBuffer.getShort();
     }
 
     private int getUnixTime(){
@@ -94,10 +97,10 @@ public class PduMess extends Pdu {
     }
 
     private String getMessage(){
-        int messageLenght = getMessageLenght();
+        int messageLength = getMessageLength();
         ByteBuffer byteBuffer = ByteBuffer.allocate
-                (messageLenght);
-        for (int i = 12;i < (messageLenght + 12);i++)
+                (messageLength);
+        for (int i = 12;i < (messageLength + 12);i++)
         byteBuffer.put(sequenceBuilder.toByteArray()[i]);
         return new String(byteBuffer.array(), Charset.forName
                 ("UTF-8"));
@@ -108,7 +111,7 @@ public class PduMess extends Pdu {
 
     private String getClientId(){
         int clientIdLength = getIdentityLength();
-        int startOfLoop = getMessageLenght() + 12;
+        int startOfLoop = getMessageLength() + 12;
 
         //makes sure the loop dosent start at the padding of message.
         while(!dividableByFour(startOfLoop)){
