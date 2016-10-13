@@ -20,30 +20,32 @@ public class PDUInputStream {
     //// TODO: 2016-10-11 much more...
     public Pdu readPdu() throws EOFException, IOException {
 /*
-        while(pduScanner.hasNext()){
-           byte operationNumber = pduScanner.nextByte();
-
-            switch (operationNumber){
-                case 4: PduSlist listMessage = new PduSlist();
-                case 10: PduMess inMessage = new PduMess("not " +
-                        "implemented yet!");
-                    break;
-                case 11: //we recieved a quit message.
-                         //terminate connection.
-                    break;
-                case 16: PduPjoin joinMessage = new PduPjoin();
-                    break;
-                case 17: PduPleave leaveMessage = new PduPleave();
-                    break;
-                case 19: PduParticipants participantsMessage = new
-                        PduParticipants;
-                    break;
-                default:
-                    System.out.println("operation nr: "
-                            + operationNumber +
-                            "is not a valid operation code!");
-            }
+        byte operationNumber = pduScanner.nextByte();
+        switch (operationNumber){
+            case 4: byte[] sListMessage = new byte["size of pdu"];
+                PduSlist pduSlist = new PduSlist(sListMessage);
+            case 10: byte[] inMess= new byte["size of pdu"];
+                PduMess pduMess = new PduMess(inMess);
+                break;
+            case 11: //we recieved a quit message.
+                //terminate connection.
+                break;
+            case 16: byte[] pJoinMessage = new byte["size of pdu"];
+                PduPjoin pduPjoin = new PduPjoin(pJoinMessage);
+                break;
+            case 17: byte[] pLeaveMessage = new byte["size of pdu"];
+                PduPleave pduPleave= new PduPleave(pLeaveMessage);
+                break;
+            case 19: byte[] participantsMessage = new byte["size of pdu"];
+                PduParticipants pduParticipants = new
+                        PduParticipants(participantsMessage);
+                break;
+            default:
+                System.out.println("operation nr: "
+                        + operationNumber +
+                        "is not a valid operation code!");
         }*/
         return null;
     }
 }
+

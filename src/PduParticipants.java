@@ -5,16 +5,20 @@ import java.util.List;
 
 /**
  * Created by kristoffer on 2016-10-13.
- * TODO: fix some details with the print and test!
+ * TODO: test, javadoc!
  */
 public class PduParticipants extends Pdu{
 
     private List<String> participantsList;
+    private int nrOfIdentites;
 
     public PduParticipants(byte[] byteArray){
         super();
         participantsList = new ArrayList<>();
         sequenceBuilder.append(byteArray);
+        nrOfIdentites = (int)getNrOfIdentities();
+        getParticipants();
+        printParticipantsList();
     }
 
     private byte getNrOfIdentities(){
@@ -40,9 +44,11 @@ public class PduParticipants extends Pdu{
             i++;
         }
     }
-    public void printParticipantsList(){
-        for (String participant:participantsList) {
-            System.out.println(participant);
+    private void printParticipantsList(){
+        for (int i = 0; i < nrOfIdentites; i++) {
+            System.out.println("Participant nr: "+ (i+1));
+            System.out.println("Client name: "+ participantsList.get
+                    (i));
         }
     }
 }
